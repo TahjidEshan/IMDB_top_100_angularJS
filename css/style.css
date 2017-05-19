@@ -1,18 +1,18 @@
 #wrapper {
-  padding-left: 250px;
+  padding-left: 20%;
   transition: all 0.4s ease 0s;
 }
 
 #sidebar-wrapper {
-  margin-left: -250px;
-  left: 250px;
-  width: 250px;
+  margin-left: -20%;
+  left: 20%;
+  width: 20%;
   background: #000;
   position: fixed;
   height: 100%;
   overflow-y: auto;
   z-index: 1000;
-  margin-top:53px;
+  margin-top:60px;
   transition: all 0.4s ease 0s;
 }
 .header{
@@ -20,6 +20,7 @@
   text-decoration-color: white;
   background-color: #B2BEB5;
   width:100%;
+  position: fixed;
 }
 .header-text{
   color: white;
@@ -29,14 +30,14 @@
 #page-content-wrapper {
   width: 100%;
 }
-.tableView{
-  margin-top:200px;
-  margin-left: 300px;
+.view{
+  margin-top:70px;
+  margin-left: 20%;
 }
 .sidebar-nav {
   position: absolute;
   top: 0;
-  width: 250px;
+  width: 20%;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -54,16 +55,19 @@
 
     #wrapper.active {
       position: relative;
-      left: 250px;
+      left: 2;
     }
 
     #wrapper.active #sidebar-wrapper {
-      left: 250px;
-      width: 250px;
+      left: 20%;
+      width: 20%;
       transition: all 0.4s ease 0s;
     }
 
 }
 .btn-custom{
-  width:250px;
+  width:500%;
+}
+table, th, td {
+    border: 1px solid black;
 }

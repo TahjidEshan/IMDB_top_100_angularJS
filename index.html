@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="movies">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,15 +8,6 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/angular.min.js"></script>
         <title>IMDB Movies top 100</title>
-        <script>
-            var movies = angular.module('movies', []);
-            Movies.controller("movieCtrl", ['$scope', '$http', function ($scope, $http) {
-                    $http.get('movies.json').success(function (data) {
-                        $scope.books = data;
-                        console.log(data);
-                    });
-                }]);
-        </script>
     </head>
     <body>
         <div class="container-fluid whole wrapper">
@@ -30,13 +21,31 @@
                     <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Delete Entry</a></li><br>
                 </ul>
             </div>
-            <div ng-controller="movieCtrl" class="tableView">
-                <table>
-                    <th>Title</th>
-                    <th>Rank</th>
-                    <option ng-repeat="entry in movies.movies" value="{{entry.name}}">{{entry.name}}</option>
+
+            <div ng-app="myApp" ng-controller="customersCtrl">
+              <table class="view" style="width:80%">
+                  <tr>
+                      <th>Title</th>
+                      <th>Rank</th>
+                  </tr>
+                  <tbody ng:repeat="x in myData">
+                    <tr>
+                        <td>{{x.title}}</td>
+                        <td>{{x.rank}}</td>
+                    </tr>
+                  </tbody>
                 </table>
             </div>
+
+            <script>
+                var app = angular.module('myApp', []);
+                app.controller('customersCtrl', function ($scope, $http) {
+                    $http.get("movies.json").then(function (response) {
+                        $scope.myData = response.data.records;
+                    });
+                });
+            </script>
+
         </div>
     </body>
 </html>
