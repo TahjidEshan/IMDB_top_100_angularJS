@@ -10,38 +10,43 @@
         <title>IMDB Movies top 100</title>
     </head>
     <body>
-        <div class="container-fluid whole wrapper">
+        <div class="container-fluid whole wrapper" ng-app="myApp" ng-controller="movieCtrl">
             <div class="navbar navbar-default row col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
                 <p class="navbar-brand header-text ">IMDB Top 100 Movies</p>
             </div>
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
+                    <li><div class="form-group" style="width:500%;">
+                            <input class="form-control" type="text" ng-model="search" placeholder="search..." />
+                        </div></li>
                     <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Create new entry</a></li>
                     <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Update Entry</a></li><br>
                     <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Delete Entry</a></li><br>
                 </ul>
             </div>
 
-            <div ng-app="myApp" ng-controller="customersCtrl">
-              <table class="view" style="width:80%">
-                  <tr>
-                      <th>Title</th>
-                      <th>Rank</th>
-                  </tr>
-                  <tbody ng:repeat="x in myData">
-                    <tr>
-                        <td>{{x.title}}</td>
-                        <td>{{x.rank}}</td>
-                    </tr>
-                  </tbody>
+            <div >
+                <table class="view table table-bordered table-striped" style="width:80%">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="movie in movies | filter : {'title': search}">
+                            <td>{{movie.title}}</td>
+                            <td>{{movie.rank}}</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
             <script>
                 var app = angular.module('myApp', []);
-                app.controller('customersCtrl', function ($scope, $http) {
-                    $http.get("movies.json").then(function (response) {
-                        $scope.myData = response.data.records;
+                app.controller('movieCtrl', function ($scope, $http) {
+                    $http.get("data/movies.json").then(function (response) {
+                        $scope.movies = response.data;
                     });
                 });
             </script>
