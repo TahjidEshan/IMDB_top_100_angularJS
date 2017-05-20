@@ -24,7 +24,8 @@
                     <li class="sidebar-brand"><button type="button" name="button" class="btn btn-default btn-custom" style="margin-top:-2px;" ng-click="showEnter()">Create New Entry</button></li>
                 </ul>
             </div>
-            <div ng-show = "visibleTable">
+            <div class="main">
+              <div ng-show = "visibleTable">
                 <table class="view table table-bordered table-striped" style="width:80%; text-align:center;">
                     <thead>
                         <tr>
@@ -41,18 +42,32 @@
                 </table>
             </div>
             <div class="popUp view" ng-show = "visible">
-                Title of the Movie : {{titleMovie}} <br> Rank of the Movie: {{rankMovie}}<br>
-                <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="toggleUpdate()">Update Entry</button>
-                <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="deleteEntry(rankMovie)">Delele Entry</button>
-                <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="goBack()">Go Back</button>
+                Movie Details
+                <br><br>
+                <table style="width:100%;text-align:justified;border:0px solid black;">
+                  <tr style="border:0px solid black;">
+                    <td style="border:0px solid black;">Title of the Movie</td>
+                    <td style="border:0px solid black;">:</td>
+                    <td style="text-align:center;border:0px solid black;">{{titleMovie}}</td>
+                  </tr>
+                  <tr style="border:0px solid black;">
+                    <td style="border:0px solid black;">Rank of the Movie</td>
+                    <td style="border:0px solid black;">:</td>
+                    <td style="text-align:center;border:0px solid black;">{{rankMovie}}</td>
+                  </tr>
+                </table>
+                <br><br>
+                <button type="button" name="button" class="btn btn-default btn-custom-popup update" style="width:100%;" ng-click="toggleUpdate()">Update Entry</button>
+                <button type="button" name="button" class="btn btn-default btn-custom-popup delete" style="width:100%;" ng-click="deleteEntry(rankMovie)">Delele Entry</button>
+                <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
             </div>
             <div class="popUp view" ng-show="enter">
               <p style="text-align:center;">Enter New Entry Details</p>
               <div class="form-group">
                       <input class="form-control" type="text" ng-model="inputTitle" placeholder="Title" />
                       <input class="form-control" type="number" min="1" ng-model="inputRank" placeholder="Rank" />
-                      <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="addEntry(inputTitle, inputRank)">Submit</button>
-                      <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="goBack()">Go Back</button>
+                      <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="addEntry(inputTitle, inputRank)">Submit</button>
+                      <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
               </div>
             </div>
             <div class="popUp view" ng-show="update">
@@ -60,8 +75,8 @@
               <div class="form-group">
                       <input class="form-control" type="text" ng-model="inputTitleNew" placeholder="Title" />
                       <input class="form-control" type="number" min="1" ng-model="inputRankNew" placeholder="Rank" />
-                      <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="updateEntry(inputTitleNew, inputRankNew, rankMovie)">Update</button>
-                      <button type="button" name="button" class="btn btn-default btn-custom-popup" style="width:100%;" ng-click="goBack()">Go Back</button>
+                      <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="updateEntry(inputTitleNew, inputRankNew, rankMovie)">Update</button>
+                      <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
               </div>
             </div>
             <script>
@@ -165,5 +180,6 @@
                 });
             </script>
         </div>
-    </body>
+</div>
+      </body>
 </html>
