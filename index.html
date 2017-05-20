@@ -19,7 +19,7 @@
                     <li><div class="form-group" style="width:500%;">
                             <input class="form-control" type="text" ng-model="search" placeholder="search..." />
                         </div></li>
-                    <li class="sidebar-brand btn btn-default btn-custom"><button type="button" name="button" class="btn btn-default" ng-click="showEnter()">Create new entry</button></li>
+                    <li class="sidebar-brand"><button type="button" name="button" class="btn btn-default btn-custom" style="margin-top:-20px;" ng-click="showEnter()">Create new entry</button></li>
                 </ul>
             </div>
             <div ng-show = "visibleTable">
@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="movie in movies | filter : {'title': search}">
-                            <td><a href="#" ng-click="showAlert(movie.title,movie.rank)">{{movie.title}}</a></td>
+                            <td><button type="button" name="button" class="btn btn-default" style="width:100%;" ng-click="showAlert(movie.title,movie.rank)">{{movie.title}}</button></td>
                             <td>{{movie.rank}}</td>
                         </tr>
                     </tbody>
@@ -47,7 +47,7 @@
             <div class="view" ng-show="enter">
               <div class="form-group">
                       <input class="form-control" type="text" ng-model="inputTitle" placeholder="Title" />
-                      <input class="form-control" type="text" ng-model="inputRank" placeholder="Rank" />
+                      <input class="form-control" type="number" ng-model="inputRank" placeholder="Rank" />
                       <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="addEntry(inputTitle, inputRank)">Submit</button>
                       <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="goBack()">Go Back</button>
               </div>
@@ -56,7 +56,7 @@
               Title of the Movie : {{titleMovie}} <br> Rank of the Movie: {{rankMovie}}<br>
               <div class="form-group">
                       <input class="form-control" type="text" ng-model="inputTitleNew" placeholder="Title" />
-                      <input class="form-control" type="text" ng-model="inputRankNew" placeholder="Rank" />
+                      <input class="form-control" type="number" ng-model="inputRankNew" placeholder="Rank" />
                       <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="updateEntry(inputTitleNew, inputRankNew, rankMovie)">Update</button>
                       <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="goBack()">Go Back</button>
               </div>
