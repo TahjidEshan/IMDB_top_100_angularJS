@@ -22,7 +22,6 @@
                     <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Create new entry</a></li>
                 </ul>
             </div>
-
             <div ng-show = "visibleTable">
                 <table class="view table table-bordered table-striped" style="width:80%">
                     <thead>
@@ -40,10 +39,10 @@
                 </table>
             </div>
             <div class="popUp view" ng-show = "visible">
-              {{titleMovie}} <br> {{rankMovie}}<br>
-              <button type="button" name="button" class="btn btn-default btn-custom-popup">Update Entry</button>
-              <button type="button" name="button" class="btn btn-default btn-custom-popup">Delele Entry</button>
-              <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="goBack()">Go Back</button>
+                {{titleMovie}} <br> {{rankMovie}}<br>
+                <button type="button" name="button" class="btn btn-default btn-custom-popup">Update Entry</button>
+                <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="deleteEntry(rankMovie)">Delele Entry</button>
+                <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="goBack()">Go Back</button>
             </div>
             <script>
                 var app = angular.module('myApp', []);
@@ -51,23 +50,37 @@
                     $http.get("data/movies.json").then(function (response) {
                         $scope.movies = response.data;
                     });
-                    $scope.visible=false;
-                    $scope.visibleTable=true;
+                    $scope.visible = false;
+                    $scope.visibleTable = true;
                     $scope.titleMovie;
                     $scope.rankMovie;
-                    $scope.showAlert = function (title,rank) {
+                    $scope.showAlert = function (title, rank) {
                         $scope.visible = true;
-                        $scope.visibleTable= false;
-                        $scope.titleMovie=title;
-                        $scope.rankMovie=rank;
+                        $scope.visibleTable = false;
+                        $scope.titleMovie = title;
+                        $scope.rankMovie = rank;
                     };
                     $scope.goBack = function () {
                         $scope.visible = false;
-                        $scope.visibleTable= true;
+                        $scope.visibleTable = true;
+                    };
+                    $scope.deleteEntry = function (rank) {
+                        for (i = 0; i < $scope.movies.length; i++) {
+                            if ($scope.movies[i].rank === rank) {
+                                $scope.movies.splice(i, 1);
+                                $scope.updateIndex();
+                            }
+                        }
+                        $scope.goBack();
+                    };
+                    $scope.updateIndex = function () {
+                        for (i = 0; i < $scope.movies.length; i++) {
+                            $scope.movies[i].rank = i + 1;
+                        }
+                        return null;
                     };
                 });
             </script>
-
         </div>
     </body>
 </html>
