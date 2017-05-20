@@ -16,16 +16,11 @@
   transition: all 0.4s ease 0s;
 }
 .header{
-  text-align: center;
+  text-align: right;
   text-decoration-color: white;
   background-color: #B2BEB5;
   width:100%;
   position: fixed;
-}
-.header-text{
-  color: white;
-  font-size:35;
-  font-family: monospace;
 }
 #page-content-wrapper {
   width: 100%;
@@ -73,4 +68,14 @@
 }
 table, th, td {
     border: 1px solid black;
+}
+.header-text{
+  color: white;
+  font-size:35;
+  font-family: monospace;
+  text-align: center;
+}
+.popUp{
+    border-style: solid;
+    border-width: 15px;
 }
