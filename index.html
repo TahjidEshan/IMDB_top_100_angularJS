@@ -20,12 +20,10 @@
                             <input class="form-control" type="text" ng-model="search" placeholder="search..." />
                         </div></li>
                     <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Create new entry</a></li>
-                    <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Update Entry</a></li><br>
-                    <li class="sidebar-brand btn btn-default btn-custom"><a href="#">Delete Entry</a></li><br>
                 </ul>
             </div>
 
-            <div >
+            <div ng-show = "visibleTable">
                 <table class="view table table-bordered table-striped" style="width:80%">
                     <thead>
                         <tr>
@@ -35,19 +33,38 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="movie in movies | filter : {'title': search}">
-                            <td>{{movie.title}}</td>
+                            <td><a href="#" ng-click="showAlert(movie.title,movie.rank)">{{movie.title}}</a></td>
                             <td>{{movie.rank}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
+            <div class="popUp view" ng-show = "visible">
+              {{titleMovie}} <br> {{rankMovie}}<br>
+              <button type="button" name="button" class="btn btn-default btn-custom-popup">Update Entry</button>
+              <button type="button" name="button" class="btn btn-default btn-custom-popup">Delele Entry</button>
+              <button type="button" name="button" class="btn btn-default btn-custom-popup" ng-click="goBack()">Go Back</button>
+            </div>
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('movieCtrl', function ($scope, $http) {
                     $http.get("data/movies.json").then(function (response) {
                         $scope.movies = response.data;
                     });
+                    $scope.visible=false;
+                    $scope.visibleTable=true;
+                    $scope.titleMovie;
+                    $scope.rankMovie;
+                    $scope.showAlert = function (title,rank) {
+                        $scope.visible = true;
+                        $scope.visibleTable= false;
+                        $scope.titleMovie=title;
+                        $scope.rankMovie=rank;
+                    };
+                    $scope.goBack = function () {
+                        $scope.visible = false;
+                        $scope.visibleTable= true;
+                    };
                 });
             </script>
 
