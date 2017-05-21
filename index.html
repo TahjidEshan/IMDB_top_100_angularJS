@@ -20,249 +20,250 @@
             <div class="navbar navbar-default row col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
                 <img src="icon/imdb.png" alt="LOGO" type="image/png" height:"5" width="50"> <p class="navbar-brand header-text">IMDb Top 100 Movies</p>
             </div>
-            <div id="sidebar-wrapper" style="height:50%;">
-                <ul class="sidebar-nav">
-                    <li><div class="form-group" style="width:500%;">
-                            <input class="form-control" type="text" ng-model="search" placeholder="search..." />
-                        </div></li>
-                    <li class="sidebar-brand"><button type="button" name="button" class="btn btn-default btn-custom" style="margin-top:-20px;" ng-click="goBack()">Show Table</button></li>
-                    <li class="sidebar-brand"><button type="button" name="button" class="btn btn-default btn-custom" style="margin-top:-2px;" ng-click="showEnter()">Create New Entry</button></li>
-                </ul>
-            </div>
-            <div class="main">
-                <div ng-show = "visibleTable">
-                    <table class="view table table-bordered table-striped" style="width:80%; text-align:center;">
-                        <thead>
-                            <tr>
-                                <th style="text-align:center;">Title</th>
-                                <th style="text-align:center;">Rank</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="movie in movies | filter : {'title': search}">
-                                <td><button type="button" name="button" class="btn btn-default" style="width:100%;" ng-click="showAlert(movie.title,movie.rank)">{{movie.title}}</button></td>
-                                <td>{{movie.rank}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li><div class="form-group" style="width:500%;">
+                                <input class="form-control" type="text" ng-model="search" placeholder="search..." />
+                            </div></li>
+                        <li class="sidebar-brand"><button type="button" name="button" class="btn btn-default btn-custom" style="margin-top:-20px;" ng-click="goBack()">Show Table</button></li>
+                        <li class="sidebar-brand"><button type="button" name="button" class="btn btn-default btn-custom" style="margin-top:-2px;" ng-click="showEnter()">Create New Entry</button></li>
+                    </ul>
                 </div>
-                <div class="popUp view" ng-show = "visible">
-                    <p style="text-align:center;">Movie Details<p>
+                <div class="main">
+                    <div ng-show = "visibleTable">
+                        <table class="view table table-bordered table-striped" style="width:80%; text-align:center;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;">Title</th>
+                                    <th style="text-align:center;">Rank</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="movie in movies | filter : {'title': search}">
+                                    <td><button type="button" name="button" class="btn btn-default" style="width:100%;" ng-click="showAlert(movie.title,movie.rank)">{{movie.title}}</button></td>
+                                    <td>{{movie.rank}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="popUp view" ng-show = "visible">
+                        <p style="text-align:center;">Movie Details<p>
+                            <br><br>
+                        <table style="width:100%;text-align:justified;border:0px solid black;">
+                            <tr style="border:0px solid black;">
+                                <td style="border:0px solid black;">Title of the Movie</td>
+                                <td style="border:0px solid black;">:</td>
+                                <td style="text-align:center;border:0px solid black;">{{titleMovie}}</td>
+                            </tr>
+                            <tr style="border:0px solid black;">
+                                <td style="border:0px solid black;">Rank of the Movie</td>
+                                <td style="border:0px solid black;">:</td>
+                                <td style="text-align:center;border:0px solid black;">{{rankMovie}}</td>
+                            </tr>
+                        </table>
                         <br><br>
-                    <table style="width:100%;text-align:justified;border:0px solid black;">
-                        <tr style="border:0px solid black;">
-                            <td style="border:0px solid black;">Title of the Movie</td>
-                            <td style="border:0px solid black;">:</td>
-                            <td style="text-align:center;border:0px solid black;">{{titleMovie}}</td>
-                        </tr>
-                        <tr style="border:0px solid black;">
-                            <td style="border:0px solid black;">Rank of the Movie</td>
-                            <td style="border:0px solid black;">:</td>
-                            <td style="text-align:center;border:0px solid black;">{{rankMovie}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
-                    <button type="button" name="button" class="btn btn-default btn-custom-popup update" style="width:100%;" ng-click="toggleUpdate()">Update Entry</button>
-                    <button type="button" name="button" class="btn btn-default btn-custom-popup delete" style="width:100%;" ng-click="deleteEntry(rankMovie)">Delele Entry</button>
-                    <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
-                </div>
-                <div class="popUp view" ng-show="enter">
-                    <p style="text-align:center;">Enter New Entry Details</p>
-                    <div class="form-group">
-                        <input class="form-control" type="text" ng-model="inputTitle" placeholder="Title" />
-                        <input class="form-control" type="number" min="1" max="{{movies.length}}" ng-model="inputRank" placeholder="Rank" />
-                        <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="addEntry(inputTitle, inputRank)">Submit</button>
+                        <button type="button" name="button" class="btn btn-default btn-custom-popup update" style="width:100%;" ng-click="toggleUpdate()">Update Entry</button>
+                        <button type="button" name="button" class="btn btn-default btn-custom-popup delete" style="width:100%;" ng-click="deleteEntry(rankMovie)">Delele Entry</button>
                         <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
                     </div>
-                </div>
-                <div class="popUp view" ng-show="update">
-                    <p style="text-align:center;">Movie Details<p>
-                        <br><br>
-                    <table style="width:100%;text-align:justified;border:0px solid black;">
-                        <tr style="border:0px solid black;">
-                            <td style="border:0px solid black;">Title of the Movie</td>
-                            <td style="border:0px solid black;">:</td>
-                            <td style="text-align:center;border:0px solid black;">{{titleMovie}}</td>
-                        </tr>
-                        <tr style="border:0px solid black;">
-                            <td style="border:0px solid black;">Rank of the Movie</td>
-                            <td style="border:0px solid black;">:</td>
-                            <td style="text-align:center;border:0px solid black;">{{rankMovie}}</td>
-                        </tr>
-                    </table>
-                    <br><br>
-                    <div class="form-group">
-                        <input class="form-control" type="text" ng-model="inputTitleNew" placeholder="Title" />
-                        <input class="form-control" type="number" min="1" max="{{movies.length}}" ng-model="inputRankNew" placeholder="Rank" />
-                        <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="updateEntry(inputTitleNew, inputRankNew, rankMovie)">Update</button>
-                        <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
+                    <div class="popUp view" ng-show="enter">
+                        <p style="text-align:center;">Enter New Entry Details</p>
+                        <div class="form-group">
+                            <input class="form-control" type="text" ng-model="inputTitle" placeholder="Title" />
+                            <input class="form-control" type="number" min="1" max="{{movies.length}}" ng-model="inputRank" placeholder="Rank" />
+                            <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="addEntry(inputTitle, inputRank)">Submit</button>
+                            <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
+                        </div>
                     </div>
-                </div>
-                <script>
-                    var app = angular.module('myApp', []);
-                    app.controller('movieCtrl', function ($scope, $http) {
-                        $http.get("data/movies.json").then(function (response) {
-                            $scope.movies = response.data;
-                        });
-                        $scope.visible = false;
-                        $scope.visibleTable = true;
-                        $scope.enter = false;
-                        $scope.update = false;
-                        $scope.titleMovie;
-                        $scope.rankMovie;
-                        $scope.showAlert = function (title, rank) {
-                            $scope.visible = true;
-                            $scope.visibleTable = false;
-                            $scope.enter = false;
-                            $scope.update = false;
-                            $scope.titleMovie = title;
-                            $scope.rankMovie = rank;
-                        };
-                        $scope.goBack = function () {
+                    <div class="popUp view" ng-show="update">
+                        <p style="text-align:center;">Movie Details<p>
+                            <br><br>
+                        <table style="width:100%;text-align:justified;border:0px solid black;">
+                            <tr style="border:0px solid black;">
+                                <td style="border:0px solid black;">Title of the Movie</td>
+                                <td style="border:0px solid black;">:</td>
+                                <td style="text-align:center;border:0px solid black;">{{titleMovie}}</td>
+                            </tr>
+                            <tr style="border:0px solid black;">
+                                <td style="border:0px solid black;">Rank of the Movie</td>
+                                <td style="border:0px solid black;">:</td>
+                                <td style="text-align:center;border:0px solid black;">{{rankMovie}}</td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <div class="form-group">
+                            <input class="form-control" type="text" ng-model="inputTitleNew" placeholder="Title" />
+                            <input class="form-control" type="number" min="1" max="{{movies.length}}" ng-model="inputRankNew" placeholder="Rank" />
+                            <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="updateEntry(inputTitleNew, inputRankNew, rankMovie)">Update</button>
+                            <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
+                        </div>
+                    </div>
+                    <script>
+                        var app = angular.module('myApp', []);
+                        app.controller('movieCtrl', function ($scope, $http) {
+                            $http.get("data/movies.json").then(function (response) {
+                                $scope.movies = response.data;
+                            });
                             $scope.visible = false;
-                            $scope.enter = false;
-                            $scope.update = false;
                             $scope.visibleTable = true;
-                            $scope.clearAll();
-                        };
-                        $scope.deleteEntry = function (rank) {
-                            for (i = 0; i < $scope.movies.length; i++) {
-                                if ($scope.movies[i].rank === rank) {
-                                    $scope.movies.splice(i, 1);
-                                    $scope.updateIndex();
-                                    window.alert("Entry Deleted Successfully");
-                                }
-                            }
-                            $scope.goBack();
-                        };
-                        $scope.updateIndex = function () {
-                            for (i = 0; i < $scope.movies.length; i++) {
-                                $scope.movies[i].rank = i + 1;
-                            }
-                            return null;
-                        };
-                        $scope.addEntry = function (title, rank) {
-                            if (!$scope.exists(title)) {
-                                if (rank < $scope.movies.length) {
-                                    for (i = $scope.movies.length - 1; i >= 0; i--) {
-                                        $scope.movies[i + 1] = $scope.movies[i];
-                                        if ($scope.movies[i].rank == rank) {
-                                            $scope.movies[i] = ({'title': title, 'rank': rank});
-                                            $scope.updateIndex();
-                                            window.alert("Entry Added");
-                                            break;
-                                        }
-                                    }
-                                } else {
-                                    $scope.movies[$scope.movies.length] = ({'title': title, 'rank': rank});
-                                    $scope.updateIndex();
-                                    window.alert("Entry Added");
-                                }
-                            } else {
-                                window.alert("Entry Already Exists");
-                            }
-                            $scope.goBack();
-                        };
-                        $scope.exists = function (title) {
-                            for (i = 0; i < $scope.movies.length; i++) {
-                                if ($scope.movies[i].title === title) {
-                                    return true;
-                                }
-                                return false;
-                            }
-                        };
-                        $scope.showEnter = function () {
-                            $scope.visible = false;
-                            $scope.visibleTable = false;
-                            $scope.enter = true;
-                            $scope.update = false;
-                        };
-                        $scope.toggleUpdate = function () {
-                            $scope.visible = false;
-                            $scope.visibleTable = false;
                             $scope.enter = false;
-                            $scope.update = true;
-                        };
-                        $scope.updateEntry = function (newTitle, newRank, rank) {
-                            for (i = 0; i < $scope.movies.length; i++) {
-                                if ($scope.movies[i].rank == rank) {
-                                    $scope.movies.splice(i, 1);
-                                    $scope.updateIndex();
+                            $scope.update = false;
+                            $scope.titleMovie;
+                            $scope.rankMovie;
+                            $scope.showAlert = function (title, rank) {
+                                $scope.visible = true;
+                                $scope.visibleTable = false;
+                                $scope.enter = false;
+                                $scope.update = false;
+                                $scope.titleMovie = title;
+                                $scope.rankMovie = rank;
+                            };
+                            $scope.goBack = function () {
+                                $scope.visible = false;
+                                $scope.enter = false;
+                                $scope.update = false;
+                                $scope.visibleTable = true;
+                                $scope.clearAll();
+                            };
+                            $scope.deleteEntry = function (rank) {
+                                for (i = 0; i < $scope.movies.length; i++) {
+                                    if ($scope.movies[i].rank === rank) {
+                                        $scope.movies.splice(i, 1);
+                                        $scope.updateIndex();
+                                        //window.alert("Entry Deleted Successfully");
+                                    }
                                 }
-                            }
-                            if (!$scope.exists(newTitle)) {
-                                if (newRank < $scope.movies.length) {
-                                    for (i = $scope.movies.length - 1; i >= 0; i--) {
-                                        $scope.movies[i + 1] = $scope.movies[i];
-                                        if ($scope.movies[i].rank == newRank) {
-                                            $scope.movies[i] = ({'title': newTitle, 'rank': newRank});
-                                            $scope.updateIndex();
-                                            window.alert("Entry Updated");
-                                            break;
+                                $scope.goBack();
+                            };
+                            $scope.updateIndex = function () {
+                                for (i = 0; i < $scope.movies.length; i++) {
+                                    $scope.movies[i].rank = i + 1;
+                                }
+                                return null;
+                            };
+                            $scope.addEntry = function (title, rank) {
+                                if (!$scope.exists(title)) {
+                                    if (rank < $scope.movies.length) {
+                                        for (i = $scope.movies.length - 1; i >= 0; i--) {
+                                            $scope.movies[i + 1] = $scope.movies[i];
+                                            if ($scope.movies[i].rank == rank) {
+                                                $scope.movies[i] = ({'title': title, 'rank': rank});
+                                                $scope.updateIndex();
+                                                //window.alert("Entry Added");
+                                                break;
+                                            }
                                         }
+                                    } else {
+                                        $scope.movies[$scope.movies.length] = ({'title': title, 'rank': rank});
+                                        $scope.updateIndex();
+                                        //window.alert("Entry Added");
                                     }
                                 } else {
-                                    $scope.movies[$scope.movies.length] = ({'title': newTitle, 'rank': newRank});
-                                    $scope.updateIndex();
-                                    window.alert("Entry Updated");
+                                    window.alert("Entry Already Exists");
                                 }
-                            }
-                            $scope.goBack();
-                        };
-                        $scope.clearAll = function () {
-                            $scope.inputTitle = null;
-                            $scope.inputRank = null;
-                            $scope.inputTitleNew = null;
-                            $scope.inputRankNew = null;
-                        };
-                    });
+                                $scope.goBack();
+                            };
+                            $scope.exists = function (title) {
+                                for (i = 0; i < $scope.movies.length; i++) {
+                                    if ($scope.movies[i].title === title) {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            };
+                            $scope.showEnter = function () {
+                                $scope.visible = false;
+                                $scope.visibleTable = false;
+                                $scope.enter = true;
+                                $scope.update = false;
+                            };
+                            $scope.toggleUpdate = function () {
+                                $scope.visible = false;
+                                $scope.visibleTable = false;
+                                $scope.enter = false;
+                                $scope.update = true;
+                            };
+                            $scope.updateEntry = function (newTitle, newRank, rank) {
+                                for (i = 0; i < $scope.movies.length; i++) {
+                                    if ($scope.movies[i].rank == rank) {
+                                        $scope.movies.splice(i, 1);
+                                        $scope.updateIndex();
+                                    }
+                                }
+                                if (!$scope.exists(newTitle)) {
+                                    if (newRank < $scope.movies.length) {
+                                        for (i = $scope.movies.length - 1; i >= 0; i--) {
+                                            $scope.movies[i + 1] = $scope.movies[i];
+                                            if ($scope.movies[i].rank == newRank) {
+                                                $scope.movies[i] = ({'title': newTitle, 'rank': newRank});
+                                                $scope.updateIndex();
+                                                //window.alert("Entry Updated");
+                                                break;
+                                            }
+                                        }
+                                    } else {
+                                        $scope.movies[$scope.movies.length] = ({'title': newTitle, 'rank': newRank});
+                                        $scope.updateIndex();
+                                        //window.alert("Entry Updated");
+                                    }
+                                }
+                                $scope.goBack();
+                            };
+                            $scope.clearAll = function () {
+                                $scope.inputTitle = null;
+                                $scope.inputRank = null;
+                                $scope.inputTitleNew = null;
+                                $scope.inputRankNew = null;
+                            };
+                        });
                     </script>
-                    <div class="test">
-                      <script>
-                      describe('test', function () {
-                          beforeEach(module('myApp'));
-                          var $controller;
-                          beforeEach(inject(function (_$controller_) {
-                              $controller = _$controller_;
-                          }));
-                          describe('deleteEntry', function () {
-                              it('Entry should be deleted', function () {
-                                  var $scope = {};
-                                  var controller = $controller('movieCtrl', {$scope: $scope});
-                                  $scope.movies = [
-                                      {
-                                          "title": "The Shawshank Redemption",
-                                          "rank": "1",
-                                          "id": "tt0111161"
-                                      },
-                                      {
-                                          "title": "The Godfather",
-                                          "rank": "2",
-                                          "id": "tt0068646"
-                                      }
-                                  ];
-                                  $scope.deleteEntry("1");
-                                  expect($scope.exists("The Shawshank Redemption")).toBe(false);
-                                  $scope.deleteEntry("2");
-                                  expect($scope.exists("The Godfather")).toBe(true);
-                              });
-                          });
-                          describe('addEntry', function () {
-                              it('Entry should be added', function () {
-                                  var $scope = {};
-                                  $scope.movies=[];
-                                  var controller = $controller('movieCtrl', {$scope: $scope});
-                                  $scope.addEntry("Testing Movie","1");
-                                  expect($scope.exists("Testing Movie")).toBe(true);
-                                  $scope.addEntry("Testing Movie Last","100");
-                                  expect($scope.exists("Testing Movie Last")).toBe(false);
-                              });
-                          });
-                      });
-                  </script>
-
-                    </div>
+                </div>
             </div>
+        </div>
+        <div class="test" style="margin-top:100px;">
+            <script>
+                describe('test', function () {
+                    beforeEach(module('myApp'));
+                    var $controller;
+                    beforeEach(inject(function (_$controller_) {
+                        $controller = _$controller_;
+                    }));
+                    describe('deleteEntry', function () {
+                        it('Entry should be deleted', function () {
+                            var $scope = {};
+                            var controller = $controller('movieCtrl', {$scope: $scope});
+                            $scope.movies = [
+                                {
+                                    "title": "The Shawshank Redemption",
+                                    "rank": "1",
+                                    "id": "tt0111161"
+                                },
+                                {
+                                    "title": "The Godfather",
+                                    "rank": "2",
+                                    "id": "tt0068646"
+                                }
+                            ];
+                            $scope.deleteEntry("1");
+                            expect($scope.exists("The Shawshank Redemption")).toBe(false);
+                            $scope.deleteEntry("2");
+                            expect($scope.exists("The Godfather")).toBe(true);
+                        });
+                    });
+                    describe('addEntry', function () {
+                        it('Entry should be added', function () {
+                            var $scope = {};
+                            $scope.movies = [];
+                            var controller = $controller('movieCtrl', {$scope: $scope});
+                            $scope.addEntry("Testing Movie", "1");
+                            expect($scope.exists("Testing Movie")).toBe(true);
+                            $scope.addEntry("Testing Movie Last", "100");
+                            expect($scope.exists("Testing Movie Last")).toBe(false);
+                        });
+                    });
+                });
+            </script>
         </div>
     </body>
 </html>
