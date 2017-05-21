@@ -20,7 +20,7 @@
             <div class="navbar navbar-default row col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
                 <img src="icon/imdb.png" alt="LOGO" type="image/png" height:"5" width="50"> <p class="navbar-brand header-text">IMDb Top 100 Movies</p>
             </div>
-            <div id="sidebar-wrapper">
+            <div id="sidebar-wrapper" style="height:50%;">
                 <ul class="sidebar-nav">
                     <li><div class="form-group" style="width:500%;">
                             <input class="form-control" type="text" ng-model="search" placeholder="search..." />
@@ -48,7 +48,7 @@
                 </div>
                 <div class="popUp view" ng-show = "visible">
                     <p style="text-align:center;">Movie Details<p>
-                    <br><br>
+                        <br><br>
                     <table style="width:100%;text-align:justified;border:0px solid black;">
                         <tr style="border:0px solid black;">
                             <td style="border:0px solid black;">Title of the Movie</td>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="popUp view" ng-show="update">
                     <p style="text-align:center;">Movie Details<p>
-                    <br><br>
+                        <br><br>
                     <table style="width:100%;text-align:justified;border:0px solid black;">
                         <tr style="border:0px solid black;">
                             <td style="border:0px solid black;">Title of the Movie</td>
@@ -216,7 +216,52 @@
                             $scope.inputRankNew = null;
                         };
                     });
-                </script>
+                    </script>
+                    <div class="test">
+                      <script>
+                      describe('test', function () {
+                          beforeEach(module('myApp'));
+                          var $controller;
+                          beforeEach(inject(function (_$controller_) {
+                              $controller = _$controller_;
+                          }));
+                          describe('deleteEntry', function () {
+                              it('Entry should be deleted', function () {
+                                  var $scope = {};
+                                  var controller = $controller('movieCtrl', {$scope: $scope});
+                                  $scope.movies = [
+                                      {
+                                          "title": "The Shawshank Redemption",
+                                          "rank": "1",
+                                          "id": "tt0111161"
+                                      },
+                                      {
+                                          "title": "The Godfather",
+                                          "rank": "2",
+                                          "id": "tt0068646"
+                                      }
+                                  ];
+                                  $scope.deleteEntry("1");
+                                  expect($scope.exists("The Shawshank Redemption")).toBe(false);
+                                  $scope.deleteEntry("2");
+                                  expect($scope.exists("The Godfather")).toBe(true);
+                              });
+                          });
+                          describe('addEntry', function () {
+                              it('Entry should be added', function () {
+                                  var $scope = {};
+                                  $scope.movies=[];
+                                  var controller = $controller('movieCtrl', {$scope: $scope});
+                                  $scope.addEntry("Testing Movie","1");
+                                  expect($scope.exists("Testing Movie")).toBe(true);
+                                  $scope.addEntry("Testing Movie Last","100");
+                                  expect($scope.exists("Testing Movie Last")).toBe(false);
+                              });
+                          });
+                      });
+                  </script>
+
+                    </div>
             </div>
         </div>
     </body>
