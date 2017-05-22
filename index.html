@@ -20,8 +20,8 @@
             <div class="navbar navbar-default row col-xs-12 col-sm-12 col-md-12 col-lg-12 header">
                 <img src="icon/imdb.png" alt="LOGO" type="image/png" height:"5" width="50"> <p class="navbar-brand header-text">IMDb Top 100 Movies</p>
             </div>
-            <div class="">
-                <div id="sidebar-wrapper">
+            <div>
+                <div id="sidebar-wrapper" style="height:200px;">
                     <ul class="sidebar-nav">
                         <li><div class="form-group" style="width:500%;">
                                 <input class="form-control" type="text" ng-model="search" placeholder="search..." />
@@ -128,7 +128,7 @@
                             };
                             $scope.deleteEntry = function (rank) {
                                 for (i = 0; i < $scope.movies.length; i++) {
-                                    if ($scope.movies[i].rank === rank) {
+                                    if ($scope.movies[i].rank == rank) {
                                         $scope.movies.splice(i, 1);
                                         $scope.updateIndex();
                                         //window.alert("Entry Deleted Successfully");
@@ -166,7 +166,7 @@
                             };
                             $scope.exists = function (title) {
                                 for (i = 0; i < $scope.movies.length; i++) {
-                                    if ($scope.movies[i].title === title) {
+                                    if ($scope.movies[i].title.trim() === title.trim()) {
                                         return true;
                                     }
                                     return false;
@@ -209,6 +209,22 @@
                                     }
                                 }
                                 $scope.goBack();
+                            };
+                            $scope.getTitle=function(rank){
+                              for(i=0;i<$scope.movies.length;i++){
+                                if($scope.movies[i].rank == rank){
+                                  return $scope.movies[i].title;
+                                }
+                              }
+                              return 0;
+                            };
+                            $scope.getRank=function(title){
+                              for(i=0;i<$scope.movies.length;i++){
+                                if($scope.movies[i].title.trim() === title.trim()){
+                                  return $scope.movies[i].rank;
+                                }
+                              }
+                              return 0;
                             };
                             $scope.clearAll = function () {
                                 $scope.inputTitle = null;
@@ -260,6 +276,29 @@
                             expect($scope.exists("Testing Movie")).toBe(true);
                             $scope.addEntry("Testing Movie Last", "100");
                             expect($scope.exists("Testing Movie Last")).toBe(false);
+                        });
+                    });
+                    describe('updateEntry', function () {
+                        it('Entry should be updated', function () {
+                            var $scope = {};
+                            var controller = $controller('movieCtrl', {$scope: $scope});
+                            $scope.movies = [
+                                {
+                                    "title": "The Shawshank Redemption",
+                                    "rank": "1",
+                                    "id": "tt0111161"
+                                },
+                                {
+                                    "title": "The Godfather",
+                                    "rank": "2",
+                                    "id": "tt0068646"
+                                }
+                            ];
+                            $scope.updateEntry("The Shawshank Redemption","2","1");
+                            expect($scope.getRank("The Shawshank Redemption")).toBe(2);
+                            expect($scope.getRank("The Godfather")).toBe(1);
+                            expect($scope.getTitle("1")).toBe("The Godfather");
+                            expect($scope.getTitle("2")).toBe("The Shawshank Redemption");
                         });
                     });
                 });
