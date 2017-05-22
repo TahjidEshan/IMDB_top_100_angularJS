@@ -63,7 +63,7 @@
                             </tr>
                         </table>
                         <br><br>
-                        <button type="button" name="button" class="btn btn-default btn-custom-popup update" style="width:100%;" ng-click="toggleUpdate()">Update Entry</button>
+                        <button type="button" name="button" class="btn btn-default btn-custom-popup update" style="width:100%;" ng-click="toggleUpdate(titleMovie, rankMovie)">Update Entry</button>
                         <button type="button" name="button" class="btn btn-default btn-custom-popup delete" style="width:100%;" ng-click="deleteEntry(rankMovie)">Delele Entry</button>
                         <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
                     </div>
@@ -93,8 +93,8 @@
                         </table>
                         <br><br>
                         <div class="form-group">
-                            <input class="form-control" type="text" ng-model="inputTitleNew" placeholder="Title" />
-                            <input class="form-control" type="number" min="1" max="{{movies.length}}" ng-model="inputRankNew" placeholder="Rank" />
+                            <input class="form-control" type="text" ng-model="inputTitleNew"/>
+                            <input class="form-control" type="number" min="1" max="{{movies.length}}" ng-model="inputRankNew" />
                             <button type="button" name="button" class="btn btn-default btn-custom-popup submit" style="width:100%;" ng-click="updateEntry(inputTitleNew, inputRankNew, rankMovie)">Update</button>
                             <button type="button" name="button" class="btn btn-default btn-custom-popup home" style="width:100%;" ng-click="goBack()">Go Back</button>
                         </div>
@@ -178,11 +178,13 @@
                                 $scope.enter = true;
                                 $scope.update = false;
                             };
-                            $scope.toggleUpdate = function () {
+                            $scope.toggleUpdate = function (title, rank) {
                                 $scope.visible = false;
                                 $scope.visibleTable = false;
                                 $scope.enter = false;
                                 $scope.update = true;
+                                $scope.inputTitleNew=title;
+                                $scope.inputRankNew=rank;
                             };
                             $scope.updateEntry = function (newTitle, newRank, rank) {
                                 for (i = 0; i < $scope.movies.length; i++) {
